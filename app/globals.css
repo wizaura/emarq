@@ -42,3 +42,36 @@ body {
   background: var(--emarq-purple);
   color: var(--emarq-pink);
 }
+
+/* =========================================================
+   EMARQ — SELECTED WORK MARQUEE
+========================================================= */
+
+.work-marquee {
+  animation: emarq-work-marquee 45s linear infinite;
+  will-change: transform;
+}
+
+@keyframes emarq-work-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause when the visitor intentionally looks at a project */
+
+.work-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .work-marquee {
+    animation: none;
+  }
+}

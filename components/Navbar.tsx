@@ -1,228 +1,192 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 const navItems = [
-  {
-    label: "About",
-    href: "#about",
-  },
-  {
-    label: "Services",
-    href: "#services",
-  },
-  { 
-    label: "Work",
-    href: "#work",
-  },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Work", href: "#work" },
+  { label: "Industries", href: "#industries" },
 ];
 
 export default function Navbar() {
-  return (
-    <motion.header
-      initial={{
-        opacity: 0,
-        y: -25,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.9,
-        delay: 1.6,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className="
-        fixed
-        absolute
-        left-0
-        right-0
-        top-0
-        z-50
-        px-5
-        pt-4
-        md:px-8
-        lg:px-12
-      "
-    >
-      <div
-        className="
-          mx-auto
-          flex
-          max-w-[1700px]
-          items-center
-          justify-between
-        "
-      >
-        {/* =====================================================
-            LOGO
-        ===================================================== */}
+  const [activeSection, setActiveSection] = useState("about");
+  const [hasScrolled, setHasScrolled] = useState(false);
 
-        <motion.a
-          href="#"
-          whileHover={{ scale: 1.02 }}
-          transition={{
-            duration: 0.3,
-          }}
-          className="block"
-        >
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => document.querySelector(item.href))
+      .filter(Boolean) as HTMLElement[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              b.intersectionRatio - a.intersectionRatio
+          );
+
+        if (visibleSections.length > 0) {
+          setActiveSection(`#${visibleSections[0].target.id}`);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0.1, 0.25, 0.5, 0.75],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <header
+      className={`
+        fixed inset-x-0 top-0 z-50
+        transition-all duration-500
+        ${
+          hasScrolled
+            ? "bg-[#F7F7F5]/95 shadow-[0_1px_0_rgba(9,9,9,0.08)] backdrop-blur-md"
+            : "bg-transparent"
+        }
+      `}
+    >
+      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-6 md:px-10 lg:px-12">
+
+        {/* Logo */}
+        <Link href="#home" className="block">
           <Image
             src="/logos/logo-2.png"
             alt="Emarq — Marketing & Production"
             width={180}
             height={60}
             priority
-            className="
-              h-auto
-              w-[100px]
-              object-contain
-            "
+            className="h-auto w-[125px] object-contain brightness-0"
           />
-        </motion.a>
+        </Link>
 
-        {/* =====================================================
-            NAVIGATION
-        ===================================================== */}
-
-        <nav
-          className="
-            absolute
-            left-1/2
-            hidden
-            -translate-x-1/2
-            items-center
-            gap-9
-            md:flex
-            lg:gap-11
-          "
-        >
-          {navItems.map((item, index) => (
-            <motion.a
-              key={item.label}
+        {/* Navigation */}
+        <nav className="hidden items-center gap-2 md:flex">
+          {navItems.map((item) => (
+            <NavItem
+              key={item.href}
               href={item.href}
-              initial={{
-                opacity: 0,
-                y: -8,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.5,
-                delay: 1.8 + index * 0.08,
-              }}
-              className="
-                group
-                relative
-                py-2
-                text-[13px]
-                font-medium
-                tracking-wide
-                text-white/60
-                transition-colors
-                duration-300
-                hover:text-white
-              "
+              active={activeSection === item.href}
             >
               {item.label}
-
-              <span
-                className="
-                  absolute
-                  bottom-0
-                  left-1/2
-                  h-px
-                  w-0
-                  -translate-x-1/2
-                  bg-emarq-pink
-                  transition-all
-                  duration-300
-                  ease-out
-                  group-hover:w-full
-                "
-              />
-            </motion.a>
+            </NavItem>
           ))}
         </nav>
 
-        {/* =====================================================
-            CONTACT
-        ===================================================== */}
-
-        <motion.a
+        {/* Contact */}
+        <Link
           href="#contact"
-          initial={{
-            opacity: 0,
-            scale: 0.9,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          transition={{
-            duration: 0.6,
-            delay: 1.9,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          whileHover={{
-            scale: 1.04,
-          }}
-          whileTap={{
-            scale: 0.97,
-          }}
           className="
             group
             flex
             items-center
-            gap-3
+            gap-2
             rounded-full
-            border
-            border-white/15
-            bg-white/[0.06]
-            py-2
-            pl-4
-            pr-2
-            text-[13px]
-            font-semibold
+            bg-[#090909]
+            px-5
+            py-3
+            text-[10px]
+            font-medium
+            uppercase
+            tracking-[0.16em]
             text-white
-            backdrop-blur-md
-            transition-all
+            transition-colors
             duration-300
-            hover:border-emarq-pink/40
-            hover:bg-emarq-pink/30
-            md:py-2.5
-            md:pl-5
-            md:pr-2.5
+            hover:bg-[#44345D]
           "
         >
-          <span>Let's talk</span>
+          Let&apos;s Talk
 
-          <span
+          <ArrowUpRight
+            size={14}
+            strokeWidth={1.7}
             className="
-              flex
-              h-8
-              w-8
-              items-center
-              justify-center
-              rounded-full
-              bg-emarq-pink
-              text-emarq-purple
               transition-transform
               duration-300
-              group-hover:rotate-45
+              group-hover:-translate-y-0.5
+              group-hover:translate-x-0.5
             "
-          >
-            <ArrowUpRight
-              size={15}
-              strokeWidth={2.2}
-            />
-          </span>
-        </motion.a>
+          />
+        </Link>
       </div>
-    </motion.header>
+    </header>
+  );
+}
+
+function NavItem({
+  href,
+  children,
+  active,
+}: {
+  href: string;
+  children: React.ReactNode;
+  active: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`
+        group
+        relative
+        flex
+        items-center
+        px-3
+        py-2
+        text-[10px]
+        uppercase
+        tracking-[0.16em]
+        transition-all
+        duration-300
+        ${
+          active
+            ? "text-[#090909]"
+            : "text-[#090909]/60 hover:text-[#090909]"
+        }
+      `}
+    >
+      {children}
+
+      <span
+        className={`
+          absolute
+          bottom-1
+          left-3
+          h-px
+          bg-[#44345D]
+          transition-all
+          duration-300
+          ${
+            active
+              ? "w-[calc(100%-24px)]"
+              : "w-0 group-hover:w-[calc(100%-24px)]"
+          }
+        `}
+      />
+    </Link>
   );
 }
