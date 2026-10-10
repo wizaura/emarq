@@ -349,7 +349,8 @@ export default function Services() {
               key={service.number}
               className="
                 flex
-                min-h-[100svh]
+                min-h-[50svh]
+                md:min-h-[100svh]
                 items-center
                 px-6
                 py-24
