@@ -1,1486 +1,393 @@
 "use client";
 
-import Image from "next/image";
-import {
-  motion,
-  MotionValue,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "motion/react";
-import { useEffect, useRef } from "react";
+import { motion } from "motion/react";
 
-type Industry = {
-  number: string;
-  title: string;
-  image: string;
-  description: string;
-};
-
-const industries: Industry[] = [
+const industries = [
   {
     number: "01",
-    title: "Automotive & Luxury Vehicles",
-    image: "/industries/automotive.jpg",
-    description:
-      "Creative campaigns and experiences built for automotive and luxury brands.",
+    title: "Automotive",
+    subtitle: "& Luxury Vehicles",
+    className:
+      "col-span-12 md:col-span-8 min-h-[250px] md:min-h-[330px]",
+    theme: "dark",
   },
   {
     number: "02",
-    title: "Corporate Organisations & Start-ups",
-    image: "/industries/corporate.jpg",
-    description:
-      "Distinctive brand communication for established organisations and ambitious businesses.",
+    title: "Corporate",
+    subtitle: "& Start-ups",
+    className:
+      "col-span-12 md:col-span-4 min-h-[220px] md:min-h-[330px]",
+    theme: "purple",
   },
   {
     number: "03",
-    title: "Food & Beverage",
-    image: "/industries/food-beverage.jpg",
-    description:
-      "Visual storytelling and experiences that make food and beverage brands memorable.",
+    title: "Food",
+    subtitle: "& Beverage",
+    className:
+      "col-span-12 md:col-span-5 min-h-[230px]",
+    theme: "pink",
   },
   {
     number: "04",
     title: "Hospitality",
-    image: "/industries/hospitality.jpg",
-    description:
-      "Elevated creative experiences for hotels, restaurants and hospitality destinations.",
+    subtitle: "",
+    className:
+      "col-span-12 md:col-span-7 min-h-[230px]",
+    theme: "cream",
   },
   {
     number: "05",
-    title: "Fashion & Lifestyle",
-    image: "/industries/fashion.jpg",
-    description:
-      "Culture-led creative that gives fashion and lifestyle brands a distinctive voice.",
+    title: "Fashion",
+    subtitle: "& Lifestyle",
+    className:
+      "col-span-12 md:col-span-7 min-h-[270px]",
+    theme: "dark",
   },
   {
     number: "06",
-    title: "Events & Entertainment",
-    image: "/industries/events.jpg",
-    description:
-      "Campaigns, activations and experiences designed to bring audiences and brands together.",
+    title: "Events",
+    subtitle: "& Entertainment",
+    className:
+      "col-span-12 md:col-span-5 min-h-[270px]",
+    theme: "purple",
   },
   {
     number: "07",
     title: "Retail",
-    image: "/industries/retail.jpg",
-    description:
-      "Branded environments and creative experiences that connect customers with products.",
+    subtitle: "",
+    className:
+      "col-span-12 md:col-span-4 min-h-[220px]",
+    theme: "cream",
   },
   {
     number: "08",
     title: "E-commerce",
-    image: "/industries/ecommerce.jpg",
-    description:
-      "Digital-first brand experiences designed to capture attention and drive action.",
+    subtitle: "",
+    className:
+      "col-span-12 md:col-span-8 min-h-[220px]",
+    theme: "pink",
   },
 ];
 
 export default function Industries() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-  /*
-   * ============================================================
-   * DESKTOP SCROLL ANIMATION
-   * ============================================================
-   *
-   * Keep the original smooth continuous desktop behaviour.
-   */
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 25,
-    mass: 0.4,
-  });
-
-  const activePosition = useTransform(
-    smoothProgress,
-    [0, 1],
-    [0, industries.length - 1]
-  );
-
-  /*
-   * ============================================================
-   * MOBILE SNAP POSITION
-   * ============================================================
-   *
-   * Mobile gets a separate snapped position.
-   *
-   * This means the mobile card always settles on:
-   *
-   * 01
-   * 02
-   * 03
-   * ...
-   * 08
-   *
-   * instead of stopping between two industries.
-   */
-
-  const mobileSnappedPosition = useMotionValue(0);
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (progress) => {
-      const position =
-        progress * (industries.length - 1);
-
-      const closestIndex = Math.round(position);
-
-      mobileSnappedPosition.set(closestIndex);
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  const mobileActivePosition = useSpring(
-    mobileSnappedPosition,
-    {
-      stiffness: 75,
-      damping: 23,
-      mass: 0.7,
-    }
-  );
-
-  /*
-   * ============================================================
-   * GHOST NUMBER
-   * ============================================================
-   */
-
-  const ghostNumberX = useTransform(
-    activePosition,
-    (value) => `${value * -20}px`
-  );
-
   return (
     <section
-      ref={sectionRef}
       id="industries"
       className="
-        relative
-        h-[700vh]
         bg-[#F7F7F5]
+        px-4
+        py-20
+        sm:px-6
+        lg:px-20
       "
     >
       <div
         className="
-          sticky
-          top-0
-          h-[100svh]
-          min-h-[680px]
+          relative
           overflow-hidden
-          bg-[#F7F7F5]
-          text-[#44345D]
         "
       >
-        {/* ======================================================
-            BACKGROUND
-        ====================================================== */}
 
-        <div className="pointer-events-none absolute inset-0">
-          {/* Subtle grid */}
-          <div
-            className="
-              absolute
-              inset-0
-              opacity-[0.035]
-              bg-[linear-gradient(to_right,#44345D_1px,transparent_1px),linear-gradient(to_bottom,#44345D_1px,transparent_1px)]
-              bg-[size:90px_90px]
-            "
-          />
-
-          {/* Giant ghost typography */}
-          <div
-            className="
-              absolute
-              left-[-3%]
-              top-[10%]
-              whitespace-nowrap
-              select-none
-              text-[19vw]
-              font-black
-              uppercase
-              leading-none
-              tracking-[-0.11em]
-              text-[#44345D]/[0.035]
-            "
-          >
-            INDUSTRIES
-          </div>
-
-          {/* Giant ghost number */}
-          <motion.div
-            style={{
-              x: ghostNumberX,
-            }}
-            className="
-              absolute
-              bottom-[-12%]
-              right-[-2%]
-              select-none
-              text-[38vw]
-              font-black
-              leading-none
-              tracking-[-0.13em]
-              text-[#44345D]/[0.045]
-            "
-          >
-            08
-          </motion.div>
-
-          {/* Central soft glow */}
-          <div
-            className="
-              absolute
-              left-1/2
-              top-1/2
-              h-[600px]
-              w-[600px]
-              -translate-x-1/2
-              -translate-y-1/2
-              rounded-full
-              bg-[#44345D]/[0.025]
-              blur-[130px]
-            "
-          />
-        </div>
-
-        {/* ======================================================
-            TOP BAR
+        {/* =====================================================
+            INTRO
         ====================================================== */}
 
         <div
           className="
-            absolute
-            left-0
-            right-0
-            top-0
-            z-40
-            mx-auto
-            flex
-            max-w-[1700px]
-            items-center
-            justify-between
-            px-6
-            py-6
-            md:px-10
-            md:py-8
-            lg:px-16
-          "
-        >
-          <div className="flex items-center gap-3">
-            <span className="h-2 w-2 rounded-full bg-[#EFB9C1]" />
-
-            <span
-              className="
-                text-[9px]
-                uppercase
-                tracking-[0.22em]
-                text-[#44345D]/55
-              "
-            >
-              04 / Industries
-            </span>
-          </div>
-
-          <span
-            className="
-              hidden
-              text-[9px]
-              uppercase
-              tracking-[0.22em]
-              text-[#44345D]/35
-              md:block
-            "
-          >
-            Digital · Creative · Production
-          </span>
-
-          <span
-            className="
-              text-[9px]
-              uppercase
-              tracking-[0.22em]
-              text-[#44345D]/40
-            "
-          >
-            Dubai · UAE
-          </span>
-        </div>
-
-        {/* ======================================================
-            LEFT INDUSTRY INDEX
-        ====================================================== */}
-
-        <div
-          className="
-            absolute
-            left-[5%]
-            top-1/2
-            z-30
-            hidden
-            w-[230px]
-            -translate-y-1/2
-            md:block
-            lg:left-[7%]
-            lg:w-[270px]
-          "
-        >
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-8 bg-[#44345D]/50" />
-
-            <span
-              className="
-                text-[8px]
-                uppercase
-                tracking-[0.25em]
-                text-[#44345D]/45
-              "
-            >
-              Industries
-            </span>
-          </div>
-
-          <div className="space-y-1">
-            {industries.map((industry, index) => (
-              <IndustryIndexItem
-                key={industry.number}
-                industry={industry}
-                index={index}
-                activePosition={activePosition}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ======================================================
-            DESKTOP MAIN VISUAL
-            DO NOT CHANGE THE DESKTOP ANIMATION
-        ====================================================== */}
-
-        <div
-          className="
-            absolute
-            inset-0
+            relative
             z-10
-            hidden
-            items-center
-            justify-center
-            md:flex
+            grid
+            grid-cols-1
+            gap-14
+            lg:grid-cols-12
+            lg:gap-10
           "
         >
-          <div
-            className="
-              relative
-              h-[58vh]
-              w-[72vw]
-              max-w-[850px]
-              md:h-[65vh]
-              md:w-[48vw]
-            "
-          >
-            {industries.map((industry, index) => (
-              <IndustryVisual
-                key={industry.number}
-                industry={industry}
-                index={index}
-                activePosition={activePosition}
-              />
-            ))}
-          </div>
-        </div>
+          {/* Heading */}
 
-        {/* ======================================================
-            RIGHT CONTENT
-        ====================================================== */}
-
-        <div
-          className="
-            absolute
-            right-[5%]
-            top-1/2
-            z-30
-            hidden
-            w-[250px]
-            -translate-y-1/2
-            md:block
-            lg:right-[7%]
-            lg:w-[290px]
-          "
-        >
-          <IndustryContent
-            industries={industries}
-            activePosition={activePosition}
-          />
-        </div>
-
-        {/* ======================================================
-            MOBILE CONTENT
-        ====================================================== */}
-
-        <div
-          className="
-            absolute
-            inset-x-0
-            top-[13%]
-            z-30
-            px-6
-            md:hidden
-          "
-        >
-          <div className="mb-5 flex items-center justify-between">
-            <span
-              className="
-                text-[8px]
-                uppercase
-                tracking-[0.2em]
-                text-[#44345D]/45
-              "
-            >
-              Experience across industries
-            </span>
-
-            <MobileCounter
-              activePosition={mobileActivePosition}
-            />
-          </div>
-
-          <MobileIndustryTitle
-            industries={industries}
-            activePosition={mobileActivePosition}
-          />
-        </div>
-
-        {/* ======================================================
-            MOBILE IMAGE
-            ONLY ONE CARD IS VISIBLE
-        ====================================================== */}
-
-        <div
-          className="
-            absolute
-            left-1/2
-            top-[53%]
-            z-20
-            h-[38vh]
-            w-[88vw]
-            -translate-x-1/2
-            -translate-y-1/2
-            md:hidden
-          "
-        >
-          <MobileIndustryVisual
-            industries={industries}
-            activePosition={mobileActivePosition}
-          />
-        </div>
-
-        {/* ======================================================
-            MOBILE DESCRIPTION
-        ====================================================== */}
-
-        <div
-          className="
-            absolute
-            bottom-[14%]
-            left-6
-            right-6
-            z-30
-            md:hidden
-          "
-        >
-          <MobileIndustryDescription
-            industries={industries}
-            activePosition={mobileActivePosition}
-          />
-        </div>
-
-        {/* ======================================================
-            BOTTOM
-        ====================================================== */}
-
-        <div
-          className="
-            absolute
-            bottom-0
-            left-0
-            right-0
-            z-40
-            mx-auto
-            max-w-[1700px]
-            px-6
-            pb-6
-            md:px-10
-            md:pb-8
-            lg:px-16
-          "
-        >
-          <div className="flex items-end justify-between">
-            <div>
-              <div className="mb-2 flex items-center gap-3">
-                <span
-                  className="
-                    text-[10px]
-                    tracking-[0.2em]
-                    text-[#44345D]
-                  "
-                >
-                  <ActiveNumber
-                    activePosition={
-                      typeof window !== "undefined" &&
-                      window.innerWidth < 768
-                        ? mobileActivePosition
-                        : activePosition
-                    }
-                  />
-                </span>
-
-                <span className="text-[9px] text-[#44345D]/20">
-                  /
-                </span>
-
-                <span
-                  className="
-                    text-[9px]
-                    tracking-[0.2em]
-                    text-[#44345D]/35
-                  "
-                >
-                  08
-                </span>
-              </div>
-
-              <div
-                className="
-                  h-px
-                  w-[160px]
-                  bg-[#44345D]/10
-                  md:w-[300px]
-                "
-              >
-                <motion.div
-                  style={{
-                    scaleX: scrollYProgress,
-                    transformOrigin: "left",
-                  }}
-                  className="
-                    h-full
-                    bg-[#44345D]
-                  "
-                />
-              </div>
-            </div>
-
+          <div className="lg:col-span-6">
             <div className="flex items-center gap-3">
               <span
                 className="
-                  hidden
-                  text-[8px]
+                  h-1.5
+                  w-1.5
+                  rounded-full
+                  bg-[#44345D]
+                "
+              />
+
+              <span
+                className="
+                  text-[10px]
+                  uppercase
+                  tracking-[0.22em]
+                  text-[#44345D]
+                "
+              >
+                Industries We Serve
+              </span>
+            </div>
+
+            <h2
+              className="
+                mt-14
+                max-w-[700px]
+                text-[15vw]
+                font-medium
+                leading-[0.77]
+                tracking-[-0.095em]
+                sm:text-[12vw]
+                md:text-[9vw]
+                lg:text-[7.5vw]
+              "
+            >
+              Experience
+              <br />
+              Across
+              <br />
+              <span className="text-[#44345D]">
+                Industries.
+              </span>
+            </h2>
+          </div>
+
+          {/* Description */}
+
+          <div
+            className="
+              flex
+              items-end
+              lg:col-span-6
+              lg:justify-end
+            "
+          >
+            <div className="max-w-[420px]">
+              <span
+                className="
+                  text-[9px]
                   uppercase
                   tracking-[0.2em]
-                  text-[#44345D]/30
-                  sm:block
+                  text-[#090909]/30
                 "
               >
-                Scroll to explore
+                One approach. Many worlds.
               </span>
 
-              <motion.div
-                animate={{
-                  y: [0, 7, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              <p
                 className="
-                  flex
-                  h-8
-                  w-5
-                  items-center
-                  justify-center
-                  rounded-full
-                  border
-                  border-[#44345D]/15
+                  mt-6
+                  text-[20px]
+                  font-medium
+                  leading-[1.25]
+                  tracking-[-0.03em]
+                  text-[#090909]/75
+                  md:text-2xl
                 "
               >
-                <span className="h-1.5 w-px bg-[#EFB9C1]" />
-              </motion.div>
+                Our flexible, tailored approach allows us
+                to work with both established organisations
+                and growing businesses across a variety of
+                industries.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* ======================================================
-            SIDE LABELS
+        {/* =====================================================
+            INDUSTRY COLLAGE
         ====================================================== */}
 
         <div
           className="
-            absolute
-            left-3
-            top-1/2
-            z-30
-            hidden
-            -translate-y-1/2
-            -rotate-90
-            md:block
+            relative
+            z-10
+            mt-24
+            grid
+            grid-cols-12
+            gap-3
+            md:mt-32
+            md:gap-4
           "
         >
-          <span
-            className="
-              text-[8px]
-              uppercase
-              tracking-[0.3em]
-              text-[#44345D]/20
-            "
-          >
-            Emarq / Experience
-          </span>
-        </div>
-
-        <div
-          className="
-            absolute
-            right-3
-            top-1/2
-            z-30
-            hidden
-            translate-y-1/2
-            rotate-90
-            md:block
-          "
-        >
-          <span
-            className="
-              text-[8px]
-              uppercase
-              tracking-[0.3em]
-              text-[#44345D]/20
-            "
-          >
-            Marketing & Production
-          </span>
+          {industries.map((industry, index) => {
+            return (
+              <IndustryBlock
+                key={industry.number}
+                industry={industry}
+                index={index}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-/* ================================================================
-   INDUSTRY INDEX ITEM
-================================================================ */
-
-function IndustryIndexItem({
+function IndustryBlock({
   industry,
   index,
-  activePosition,
 }: {
-  industry: Industry;
+  industry: {
+    number: string;
+    title: string;
+    subtitle: string;
+    className: string;
+    theme: string;
+  };
   index: number;
-  activePosition: MotionValue<number>;
 }) {
-  const opacity = useTransform(
-    activePosition,
-    (value) => {
-      const distance = Math.abs(value - index);
-
-      if (distance < 0.35) return 1;
-      if (distance < 1) return 0.55;
-
-      return 0.2;
-    }
-  );
-
-  const x = useTransform(
-    activePosition,
-    (value) => {
-      const distance = value - index;
-
-      if (Math.abs(distance) < 0.35) return 12;
-
-      return 0;
-    }
-  );
-
-  const scale = useTransform(
-    activePosition,
-    (value) => {
-      const distance = Math.abs(value - index);
-
-      return distance < 0.35 ? 1.04 : 1;
-    }
-  );
+  const themeStyles = {
+    dark: `
+      bg-[#090909]
+      text-white
+      border-[#090909]
+    `,
+    purple: `
+      bg-[#44345D]
+      text-white
+      border-[#44345D]
+    `,
+    pink: `
+      bg-[#EFB9C1]
+      text-[#090909]
+      border-[#EFB9C1]
+    `,
+    cream: `
+      bg-[#E8E5DE]
+      text-[#090909]
+      border-[#090909]/10
+    `,
+  };
 
   return (
     <motion.div
-      style={{
-        opacity,
-        x,
-        scale,
+      initial={{
+        opacity: 0,
+        scale: 0.97,
       }}
-      className="
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      transition={{
+        duration: 0.7,
+        delay: index * 0.04,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      whileHover={{
+        scale: 0.985,
+      }}
+      className={`
+        group
         relative
-        flex
-        items-center
-        gap-4
-      "
+        overflow-hidden
+        border
+        p-6
+        transition-shadow
+        duration-500
+        hover:shadow-[0_25px_60px_rgba(0,0,0,0.12)]
+        md:p-8
+        lg:p-10
+        ${industry.className}
+        ${themeStyles[industry.theme as keyof typeof themeStyles]}
+      `}
     >
+      {/* Large number */}
+
       <span
         className="
-          w-6
-          text-[8px]
+          absolute
+          right-6
+          top-5
+          font-mono
+          text-[9px]
           tracking-[0.15em]
-          text-[#44345D]
+          opacity-40
+          md:right-8
+          md:top-7
         "
       >
         {industry.number}
       </span>
 
-      <motion.span
-        className="
-          h-px
-          w-0
-          bg-[#EFB9C1]
-        "
-      />
+      {/* Decorative circle */}
 
-      <span
-        className="
-          max-w-[210px]
-          text-[13px]
-          font-medium
-          leading-[1.1]
-          tracking-[-0.025em]
-          text-[#44345D]
-          lg:text-[15px]
-        "
-      >
-        {industry.title}
-      </span>
-    </motion.div>
-  );
-}
-
-/* ================================================================
-   DESKTOP MAIN IMAGE
-   ORIGINAL ANIMATION KEPT
-================================================================ */
-
-function IndustryVisual({
-  industry,
-  index,
-  activePosition,
-}: {
-  industry: Industry;
-  index: number;
-  activePosition: MotionValue<number>;
-}) {
-  const distance = useTransform(
-    activePosition,
-    (value) => value - index
-  );
-
-  const opacity = useTransform(
-    distance,
-    [-1.2, -0.6, -0.25, 0, 0.25, 0.6, 1.2],
-    [0, 0.15, 0.55, 1, 0.55, 0.15, 0]
-  );
-
-  const scale = useTransform(
-    distance,
-    [-1, -0.4, 0, 0.4, 1],
-    [0.72, 0.9, 1, 0.9, 0.72]
-  );
-
-  const x = useTransform(
-    distance,
-    [-1, -0.4, 0, 0.4, 1],
-    ["-28%", "-8%", "0%", "8%", "28%"]
-  );
-
-  const y = useTransform(
-    distance,
-    [-1, -0.4, 0, 0.4, 1],
-    ["10%", "4%", "0%", "-4%", "-10%"]
-  );
-
-  const rotate = useTransform(
-    distance,
-    [-1, -0.4, 0, 0.4, 1],
-    [-4, -1.5, 0, 1.5, 4]
-  );
-
-  const filter = useTransform(
-    distance,
-    [-1, -0.4, 0, 0.4, 1],
-    [
-      "blur(5px)",
-      "blur(2px)",
-      "blur(0px)",
-      "blur(2px)",
-      "blur(5px)",
-    ]
-  );
-
-  return (
-    <motion.div
-      style={{
-        opacity,
-        scale,
-        x,
-        y,
-        rotate,
-        filter,
-      }}
-      className="
-        absolute
-        left-1/2
-        top-1/2
-        -translate-x-1/2
-        -translate-y-1/2
-        overflow-hidden
-        bg-[#E5E1E7]
-        shadow-[0_35px_80px_rgba(68,52,93,0.16)]
-        will-change-transform
-        h-[62vh]
-        w-[38vw]
-        max-w-[520px]
-      "
-    >
-      <Image
-        src={industry.image}
-        alt={industry.title}
-        fill
-        priority={index === 0}
-        sizes="(max-width: 768px) 88vw, 520px"
-        className="object-cover"
-      />
-
-      {/* Very subtle brand tint */}
-      <div className="absolute inset-0 bg-[#44345D]/[0.08]" />
-
-      {/* Bottom gradient */}
-      <div
-        className="
-          absolute
-          inset-0
-          bg-[linear-gradient(to_bottom,transparent_45%,rgba(68,52,93,0.35)_100%)]
-        "
-      />
-
-      {/* Image label */}
-      <div
-        className="
-          absolute
-          bottom-5
-          left-5
-          right-5
-          flex
-          items-end
-          justify-between
-        "
-      >
-        <div>
-          <span
-            className="
-              mb-1
-              block
-              text-[7px]
-              uppercase
-              tracking-[0.2em]
-              text-white/60
-            "
-          >
-            Industry
-          </span>
-
-          <span
-            className="
-              text-[10px]
-              uppercase
-              tracking-[0.15em]
-              text-white
-            "
-          >
-            {industry.number}
-          </span>
-        </div>
-
-        <span className="h-2 w-2 rounded-full bg-[#EFB9C1]" />
-      </div>
-
-      {/* Editorial frame */}
       <div
         className="
           pointer-events-none
           absolute
-          inset-3
+          -bottom-24
+          -right-24
+          h-48
+          w-48
+          rounded-full
           border
-          border-white/25
-        "
-      />
-    </motion.div>
-  );
-}
-
-/* ================================================================
-   MOBILE MAIN VISUAL
-   ONLY ONE CARD
-================================================================ */
-
-function MobileIndustryVisual({
-  industries,
-  activePosition,
-}: {
-  industries: Industry[];
-  activePosition: MotionValue<number>;
-}) {
-  return (
-    <div className="relative h-full w-full">
-      {industries.map((industry, index) => (
-        <MobileIndustryCard
-          key={industry.number}
-          industry={industry}
-          index={index}
-          activePosition={activePosition}
-        />
-      ))}
-    </div>
-  );
-}
-
-/*
- * Each card still exists in the animation layer, but only the
- * active one is visually visible.
- *
- * This prevents the mobile layout from looking like two separate
- * cards.
- */
-
-function MobileIndustryCard({
-  industry,
-  index,
-  activePosition,
-}: {
-  industry: Industry;
-  index: number;
-  activePosition: MotionValue<number>;
-}) {
-  const distance = useTransform(
-    activePosition,
-    (value) => value - index
-  );
-
-  /*
-   * Floating entrance/exit.
-   */
-
-  const opacity = useTransform(
-    distance,
-    [-1, -0.45, -0.12, 0, 0.12, 0.45, 1],
-    [0, 0, 0, 1, 0, 0, 0]
-  );
-
-  const x = useTransform(
-    distance,
-    [-1, -0.5, 0, 0.5, 1],
-    ["16%", "5%", "0%", "-5%", "-16%"]
-  );
-
-  const y = useTransform(
-    distance,
-    [-1, -0.5, 0, 0.5, 1],
-    ["7%", "3%", "0%", "-3%", "-7%"]
-  );
-
-  const scale = useTransform(
-    distance,
-    [-1, -0.5, 0, 0.5, 1],
-    [0.94, 0.98, 1, 0.98, 0.94]
-  );
-
-  const rotate = useTransform(
-    distance,
-    [-1, -0.5, 0, 0.5, 1],
-    [2, 0.8, 0, -0.8, -2]
-  );
-
-  return (
-    <motion.div
-      style={{
-        opacity,
-        x,
-        y,
-        scale,
-        rotate,
-      }}
-      className="
-        absolute
-        inset-0
-        overflow-hidden
-        rounded-[1.5rem]
-        bg-[#E5E1E7]
-        shadow-[0_28px_65px_rgba(68,52,93,0.18)]
-        will-change-transform
-      "
-    >
-      <Image
-        src={industry.image}
-        alt={industry.title}
-        fill
-        sizes="88vw"
-        priority={index === 0}
-        className="object-cover"
-      />
-
-      {/* Brand tint */}
-      <div className="absolute inset-0 bg-[#44345D]/[0.08]" />
-
-      {/* Bottom gradient */}
-      <div
-        className="
-          absolute
-          inset-0
-          bg-[linear-gradient(to_bottom,transparent_35%,rgba(68,52,93,0.42)_100%)]
+          border-current
+          opacity-[0.08]
+          transition-transform
+          duration-700
+          group-hover:scale-150
         "
       />
 
-      {/* Card label */}
-      <div
-        className="
-          absolute
-          bottom-5
-          left-5
-          right-5
-          flex
-          items-end
-          justify-between
-        "
-      >
+      {/* Content */}
+
+      <div className="relative z-10 flex h-full flex-col justify-end">
         <div>
-          <span
+          <h3
             className="
-              mb-1
-              block
-              text-[7px]
-              uppercase
-              tracking-[0.2em]
-              text-white/65
+              max-w-[800px]
+              text-[clamp(34px,5vw,78px)]
+              font-medium
+              leading-[0.85]
+              tracking-[-0.065em]
             "
           >
-            Industry
-          </span>
+            {industry.title}
+          </h3>
 
-          <span
-            className="
-              text-[10px]
-              uppercase
-              tracking-[0.15em]
-              text-white
-            "
-          >
-            {industry.number}
-          </span>
+          {industry.subtitle && (
+            <h4
+              className="
+                mt-1
+                text-[clamp(24px,3.5vw,52px)]
+                font-medium
+                leading-[0.9]
+                tracking-[-0.055em]
+                opacity-50
+              "
+            >
+              {industry.subtitle}
+            </h4>
+          )}
         </div>
-
-        <span className="h-2 w-2 rounded-full bg-[#EFB9C1]" />
       </div>
 
-      {/* Editorial frame */}
-      <div
+      {/* Corner marker */}
+
+      <span
         className="
-          pointer-events-none
           absolute
-          inset-3
-          rounded-[1.1rem]
-          border
-          border-white/25
-        "
-      />
-    </motion.div>
-  );
-}
-
-/* ================================================================
-   RIGHT CONTENT
-================================================================ */
-
-function IndustryContent({
-  industries,
-  activePosition,
-}: {
-  industries: Industry[];
-  activePosition: MotionValue<number>;
-}) {
-  return (
-    <div>
-      <div className="mb-6 flex items-center gap-3">
-        <span className="h-px w-8 bg-[#44345D]/50" />
-
-        <span
-          className="
-            text-[8px]
-            uppercase
-            tracking-[0.25em]
-            text-[#44345D]/45
-          "
-        >
-          Experience
-        </span>
-      </div>
-
-      <div className="relative min-h-[280px]">
-        <ActiveIndustryText
-          industries={industries}
-          activePosition={activePosition}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* ================================================================
-   ACTIVE INDUSTRY TEXT
-================================================================ */
-
-function ActiveIndustryText({
-  industries,
-  activePosition,
-}: {
-  industries: Industry[];
-  activePosition: MotionValue<number>;
-}) {
-  return (
-    <div>
-      {industries.map((industry, index) => (
-        <IndustryText
-          key={industry.number}
-          industry={industry}
-          index={index}
-          activePosition={activePosition}
-        />
-      ))}
-    </div>
-  );
-}
-
-function IndustryText({
-  industry,
-  index,
-  activePosition,
-}: {
-  industry: Industry;
-  index: number;
-  activePosition: MotionValue<number>;
-}) {
-  const distance = useTransform(
-    activePosition,
-    (value) => value - index
-  );
-
-  const opacity = useTransform(
-    distance,
-    [-0.7, -0.2, 0, 0.2, 0.7],
-    [0, 0, 1, 0, 0]
-  );
-
-  const y = useTransform(
-    distance,
-    [-0.7, 0, 0.7],
-    [25, 0, -25]
-  );
-
-  return (
-    <motion.div
-      style={{
-        opacity,
-        y,
-      }}
-      className="
-        pointer-events-none
-        absolute
-        left-0
-        top-0
-        w-full
-      "
-    >
-      <span
-        className="
-          mb-4
-          block
-          text-[9px]
-          uppercase
-          tracking-[0.22em]
-          text-[#44345D]
+          bottom-6
+          right-6
+          text-xl
+          opacity-30
+          transition-all
+          duration-500
+          group-hover:translate-x-1
+          group-hover:-translate-y-1
+          group-hover:opacity-100
+          md:bottom-8
+          md:right-8
         "
       >
-        {industry.number}
+        ↗
       </span>
-
-      <h3
-        className="
-          text-4xl
-          font-medium
-          leading-[0.88]
-          tracking-[-0.065em]
-          text-[#44345D]
-          lg:text-[3.7rem]
-        "
-      >
-        {industry.title}
-      </h3>
-
-      <div className="mt-6 h-px w-12 bg-[#EFB9C1]" />
-
-      <p
-        className="
-          mt-7
-          max-w-[260px]
-          text-sm
-          leading-[1.7]
-          text-[#44345D]/55
-        "
-      >
-        {industry.description}
-      </p>
-    </motion.div>
-  );
-}
-
-/* ================================================================
-   ACTIVE NUMBER
-================================================================ */
-
-function ActiveNumber({
-  activePosition,
-}: {
-  activePosition: MotionValue<number>;
-}) {
-  const number = useTransform(
-    activePosition,
-    (value) => {
-      const index = Math.round(value);
-
-      return String(index + 1).padStart(2, "0");
-    }
-  );
-
-  return <motion.span>{number}</motion.span>;
-}
-
-/* ================================================================
-   MOBILE COUNTER
-================================================================ */
-
-function MobileCounter({
-  activePosition,
-}: {
-  activePosition: MotionValue<number>;
-}) {
-  return (
-    <div
-      className="
-        text-[9px]
-        tracking-[0.2em]
-        text-[#44345D]
-      "
-    >
-      <ActiveNumber activePosition={activePosition} />
-
-      <span className="mx-2 text-[#44345D]/25">
-        /
-      </span>
-
-      <span className="text-[#44345D]/45">
-        08
-      </span>
-    </div>
-  );
-}
-
-/* ================================================================
-   MOBILE TITLE
-================================================================ */
-
-function MobileIndustryTitle({
-  industries,
-  activePosition,
-}: {
-  industries: Industry[];
-  activePosition: MotionValue<number>;
-}) {
-  return (
-    <div className="relative h-[120px]">
-      {industries.map((industry, index) => (
-        <MobileTitleItem
-          key={industry.number}
-          industry={industry}
-          index={index}
-          activePosition={activePosition}
-        />
-      ))}
-    </div>
-  );
-}
-
-function MobileTitleItem({
-  industry,
-  index,
-  activePosition,
-}: {
-  industry: Industry;
-  index: number;
-  activePosition: MotionValue<number>;
-}) {
-  const distance = useTransform(
-    activePosition,
-    (value) => value - index
-  );
-
-  const opacity = useTransform(
-    distance,
-    [-0.8, -0.25, 0, 0.25, 0.8],
-    [0, 0, 1, 0, 0]
-  );
-
-  const y = useTransform(
-    distance,
-    [-0.8, 0, 0.8],
-    [20, 0, -20]
-  );
-
-  return (
-    <motion.div
-      style={{
-        opacity,
-        y,
-      }}
-      className="absolute inset-0"
-    >
-      <span
-        className="
-          mb-2
-          block
-          text-[9px]
-          uppercase
-          tracking-[0.2em]
-          text-[#44345D]
-        "
-      >
-        {industry.number}
-      </span>
-
-      <h2
-        className="
-          max-w-[390px]
-          text-[2.45rem]
-          font-medium
-          leading-[0.86]
-          tracking-[-0.06em]
-          text-[#44345D]
-        "
-      >
-        {industry.title}
-      </h2>
-    </motion.div>
-  );
-}
-
-/* ================================================================
-   MOBILE DESCRIPTION
-================================================================ */
-
-function MobileIndustryDescription({
-  industries,
-  activePosition,
-}: {
-  industries: Industry[];
-  activePosition: MotionValue<number>;
-}) {
-  return (
-    <div className="relative">
-      {industries.map((industry, index) => (
-        <MobileDescription
-          key={industry.number}
-          industry={industry}
-          index={index}
-          activePosition={activePosition}
-        />
-      ))}
-    </div>
-  );
-}
-
-function MobileDescription({
-  industry,
-  index,
-  activePosition,
-}: {
-  industry: Industry;
-  index: number;
-  activePosition: MotionValue<number>;
-}) {
-  const distance = useTransform(
-    activePosition,
-    (value) => value - index
-  );
-
-  const opacity = useTransform(
-    distance,
-    [-0.5, -0.15, 0, 0.15, 0.5],
-    [0, 0, 1, 0, 0]
-  );
-
-  const y = useTransform(
-    distance,
-    [-0.5, 0, 0.5],
-    [15, 0, -15]
-  );
-
-  return (
-    <motion.div
-      style={{
-        opacity,
-        y,
-      }}
-      className="
-        absolute
-        left-0
-        right-0
-      "
-    >
-      <div className="mb-3 flex items-center gap-3">
-        <span className="h-px w-7 bg-[#44345D]/40" />
-
-        <span
-          className="
-            text-[8px]
-            uppercase
-            tracking-[0.2em]
-            text-[#44345D]/45
-          "
-        >
-          Experience
-        </span>
-      </div>
-
-      <p
-        className="
-          max-w-[330px]
-          text-[13px]
-          leading-[1.55]
-          text-[#44345D]/55
-        "
-      >
-        {industry.description}
-      </p>
     </motion.div>
   );
 }

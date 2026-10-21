@@ -24,7 +24,7 @@ export default function HeroContent() {
           duration: 0.7,
           delay: 1.9,
         }}
-        className="mt-4 mb-8 flex items-center gap-3"
+        className="mt-4 mb-6 flex items-center gap-3"
       >
         <span
           className="
@@ -55,7 +55,7 @@ export default function HeroContent() {
           max-w-[1000px]
           text-[clamp(4rem,9vw,9.5rem)]
           font-black
-          leading-[0.9]
+          leading-[0.8]
           tracking-[-0.075em]
         "
       >
@@ -94,7 +94,7 @@ export default function HeroContent() {
           delay: 2.7,
         }}
         className="
-          mt-6 sm:mt-10
+          mt-6 sm:mt-8
           max-w-xl
           text-base
           leading-relaxed
@@ -102,9 +102,10 @@ export default function HeroContent() {
           md:text-lg
         "
       >
-        We turn strategy, creativity and production
-        into experiences that make brands impossible
-        to overlook.
+        Emarq is a Dubai-based marketing and creative production
+        agency helping brands grow through thoughtful strategy,
+        compelling content, memorable activations and
+        carefully executed brand experiences.
       </motion.p>
 
       {/* Buttons */}
@@ -122,39 +123,21 @@ export default function HeroContent() {
           delay: 2.9,
         }}
         className="
-          mt-5 sm:mt-9
+          mt-5 sm:mt-7
           flex
           flex-wrap
           items-center
           gap-4
         "
       >
-        <MagneticButton>
-          <span>Explore our work</span>
+        <MagneticButton href="#work">
+          <span>Explore our Work</span>
         </MagneticButton>
 
-        {/* <a
-          href="#services"
-          className="
-            flex
-            items-center
-            gap-3
-            rounded-full
-            border
-            border-white/20
-            px-6
-            py-4
-            text-sm
-            font-medium
-            text-white/80
-            transition-all
-            hover:border-white/50
-            hover:text-white
-          "
-        >
-          <Play size={15} fill="currentColor" />
-          What we do
-        </a> */}
+        <MagneticButton href="#contact" variant="secondary">
+          <span>Start a Project</span>
+        </MagneticButton>
+
       </motion.div>
 
     </div>

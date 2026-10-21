@@ -114,22 +114,6 @@ export default function HeroVisual({
         >
           Dubai · UAE
         </div>
-
-        {/* Number */}
-        {/* <div
-          className="
-            absolute
-            bottom-5
-            right-6
-            text-8xl
-            font-black
-            leading-none
-            tracking-[-0.1em]
-            text-white/20
-          "
-        >
-          01
-        </div> */}
       </motion.div>
 
       {/* ONE FLOATING CARD */}
@@ -170,11 +154,11 @@ export default function HeroVisual({
         </div>
 
         <div className="text-2xl font-black leading-[0.9] tracking-[-0.05em]">
-          Strategy.
+          Ideas that
           <br />
-          Content.
+          Leave a
           <br />
-          Experiences.
+          Mark.
         </div>
       </motion.div>
 

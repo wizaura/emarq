@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight, ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const footerLinks = [
     { label: "About", href: "#about" },
@@ -60,14 +61,23 @@ export default function Footer() {
                     </div>
 
                     {/* Giant brand statement */}
+                    import Image from "next/image";
+
                     <div className="py-16 md:py-20 lg:py-24">
                         <p className="mb-5 text-[10px] uppercase tracking-[0.22em] text-white/35">
                             Built to leave a mark
                         </p>
 
-                        <h2 className="max-w-[1200px] text-[18vw] font-semibold leading-[0.72] tracking-[-0.075em] text-[#F7F7F5] md:text-[15vw] lg:text-[13vw]">
-                            EMARQ<span className="text-[#44345D]">.</span>
-                        </h2>
+                        <div className="relative w-full max-w-[1200px]">
+                            <Image
+                                src="/images/emarq-logo.svg"
+                                alt="Emarq"
+                                width={1200}
+                                height={300}
+                                priority
+                                className="h-auto w-full object-contain object-left"
+                            />
+                        </div>
                     </div>
 
                     {/* Contact row */}
