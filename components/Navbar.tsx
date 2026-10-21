@@ -13,7 +13,7 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("#about");
   const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,6 @@ export default function Navbar() {
     };
 
     handleScroll();
-
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -40,8 +39,7 @@ export default function Navbar() {
         const visibleSections = entries
           .filter((entry) => entry.isIntersecting)
           .sort(
-            (a, b) =>
-              b.intersectionRatio - a.intersectionRatio
+            (a, b) => b.intersectionRatio - a.intersectionRatio
           );
 
         if (visibleSections.length > 0) {
@@ -63,25 +61,25 @@ export default function Navbar() {
     <header
       className={`
         fixed inset-x-0 top-0 z-50
+        border-b border-[#44345D]/60
         transition-all duration-500
         ${
           hasScrolled
-            ? "bg-[#F7F7F5]/95 shadow-[0_1px_0_rgba(9,9,9,0.08)] backdrop-blur-md"
+            ? "bg-[#090909]/95 shadow-[0_8px_30px_rgba(0,0,0,0.15)] backdrop-blur-md"
             : "bg-transparent"
         }
       `}
     >
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-6 md:px-10 lg:px-12">
-
         {/* Logo */}
-        <Link href="#home" className="block">
+        <Link href="/" className="block">
           <Image
             src="/logos/logo-2.png"
             alt="Emarq — Marketing & Production"
             width={180}
             height={60}
             priority
-            className="h-auto w-[125px] object-contain brightness-0"
+            className="h-auto w-[125px] object-contain"
           />
         </Link>
 
@@ -102,22 +100,15 @@ export default function Navbar() {
         <Link
           href="#contact"
           className="
-            group
-            flex
-            items-center
-            gap-2
-            rounded-full
-            bg-[#090909]
-            px-5
-            py-3
-            text-[10px]
-            font-medium
-            uppercase
-            tracking-[0.16em]
+            group flex items-center gap-2
+            rounded-full border border-[#44345D]
+            bg-[#44345D] px-5 py-3
+            text-[10px] font-medium uppercase tracking-[0.16em]
             text-white
-            transition-colors
-            duration-300
-            hover:bg-[#44345D]
+            transition-all duration-300
+            hover:border-[#F7F7F5]
+            hover:bg-[#F7F7F5]
+            hover:text-[#090909]
           "
         >
           Let&apos;s Talk
@@ -126,8 +117,7 @@ export default function Navbar() {
             size={14}
             strokeWidth={1.7}
             className="
-              transition-transform
-              duration-300
+              transition-transform duration-300
               group-hover:-translate-y-0.5
               group-hover:translate-x-0.5
             "
@@ -151,21 +141,13 @@ function NavItem({
     <Link
       href={href}
       className={`
-        group
-        relative
-        flex
-        items-center
-        px-3
-        py-2
-        text-[10px]
-        uppercase
-        tracking-[0.16em]
-        transition-all
-        duration-300
+        group relative flex items-center px-3 py-2
+        text-[10px] uppercase tracking-[0.16em]
+        transition-colors duration-300
         ${
           active
-            ? "text-[#090909]"
-            : "text-[#090909]/60 hover:text-[#090909]"
+            ? "text-white"
+            : "text-white/60 hover:text-white"
         }
       `}
     >
@@ -173,13 +155,9 @@ function NavItem({
 
       <span
         className={`
-          absolute
-          bottom-1
-          left-3
-          h-px
-          bg-[#44345D]
-          transition-all
-          duration-300
+          absolute bottom-1 left-3 h-px
+          bg-[#8B72B5]
+          transition-all duration-300
           ${
             active
               ? "w-[calc(100%-24px)]"

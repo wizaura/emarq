@@ -67,11 +67,11 @@ export default function Footer() {
                             Built to leave a mark
                         </p>
 
-                        <div className="relative w-full max-w-[1200px]">
+                        <div className="relative w-full max-w-[800px]">
                             <Image
                                 src="/logos/logo-2.png"
                                 alt="Emarq"
-                                width={1200}
+                                width={800}
                                 height={300}
                                 priority
                                 className="h-auto w-full object-contain object-left"
