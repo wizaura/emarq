@@ -61,7 +61,6 @@ export default function Footer() {
                     </div>
 
                     {/* Giant brand statement */}
-                    import Image from "next/image";
 
                     <div className="py-16 md:py-20 lg:py-24">
                         <p className="mb-5 text-[10px] uppercase tracking-[0.22em] text-white/35">
@@ -70,7 +69,7 @@ export default function Footer() {
 
                         <div className="relative w-full max-w-[1200px]">
                             <Image
-                                src="/images/emarq-logo.svg"
+                                src="/logos/logo-2.png"
                                 alt="Emarq"
                                 width={1200}
                                 height={300}
