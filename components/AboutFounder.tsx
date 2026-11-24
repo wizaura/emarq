@@ -88,7 +88,7 @@ export default function AboutFounder() {
                         <div className="relative border-b border-white/15 lg:border-b-0 lg:border-r">
                             <div className="relative aspect-[4/5] overflow-hidden lg:mr-10 lg:mt-10">
                                 <Image
-                                    src="/images/emarq-hero.jpg"
+                                    src="/images/about-1.webp"
                                     alt="Minna Wahab — Founder of Emarq"
                                     fill
                                     className="object-cover grayscale"

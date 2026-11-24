@@ -21,56 +21,56 @@ const industries: Industry[] = [
   {
     number: "01",
     title: "Automotive & Luxury Vehicles",
-    image: "/industries/automotive.jpg",
+    image: "/images/industry-1.webp",
     description:
       "Creative campaigns and experiences built for automotive and luxury brands.",
   },
   {
     number: "02",
     title: "Corporate Organisations & Start-ups",
-    image: "/industries/corporate.jpg",
+    image: "/images/industry-2.webp",
     description:
       "Distinctive brand communication for established organisations and ambitious businesses.",
   },
   {
     number: "03",
     title: "Food & Beverage",
-    image: "/industries/food-beverage.jpg",
+    image: "/images/industry-3.webp",
     description:
       "Visual storytelling and experiences that make food and beverage brands memorable.",
   },
   {
     number: "04",
     title: "Hospitality",
-    image: "/industries/hospitality.jpg",
+    image: "/images/industry-4.webp",
     description:
       "Elevated creative experiences for hotels, restaurants and hospitality destinations.",
   },
   {
     number: "05",
     title: "Fashion & Lifestyle",
-    image: "/industries/fashion.jpg",
+    image: "/images/industry-5.webp",
     description:
       "Culture-led creative that gives fashion and lifestyle brands a distinctive voice.",
   },
   {
     number: "06",
     title: "Events & Entertainment",
-    image: "/industries/events.jpg",
+    image: "/images/service-7.webp",
     description:
       "Campaigns, activations and experiences designed to bring audiences and brands together.",
   },
   {
     number: "07",
     title: "Retail",
-    image: "/industries/retail.jpg",
+    image: "/images/service-3.webp",
     description:
       "Branded environments and creative experiences that connect customers with products.",
   },
   {
     number: "08",
     title: "E-commerce",
-    image: "/industries/ecommerce.jpg",
+    image: "/images/industry-8.webp",
     description:
       "Digital-first brand experiences designed to capture attention and drive action.",
   },

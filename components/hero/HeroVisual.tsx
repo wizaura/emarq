@@ -69,14 +69,12 @@ export default function HeroVisual({
         "
       >
         <Image
-          src="/images/emarq-hero.jpg"
+          src="/images/hero-2.webp"
           alt="Emarq creative production"
           fill
           priority
           className="
             object-cover
-            grayscale
-            contrast-125
             transition-transform
             duration-1000
             hover:scale-105

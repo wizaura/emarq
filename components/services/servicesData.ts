@@ -22,7 +22,7 @@ export const services: Service[] = [
       "Community management",
       "Monthly performance reporting",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-1.webp",
   },
   {
     number: "02",
@@ -36,7 +36,7 @@ export const services: Service[] = [
       "LinkedIn advertising",
       "YouTube advertising",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-2.webp",
   },
   {
     number: "03",
@@ -52,7 +52,7 @@ export const services: Service[] = [
       "Packaging design",
       "Visual communication",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-3.webp",
   },
   {
     number: "04",
@@ -71,7 +71,7 @@ export const services: Service[] = [
       "Personalised gifting stations",
       "Shareable brand moments",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-4.webp",
   },
   {
     number: "05",
@@ -87,7 +87,7 @@ export const services: Service[] = [
       "Custom packaging",
       "Premium corporate & event gifting",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-5.webp",
   },
   {
     number: "06",
@@ -109,7 +109,7 @@ export const services: Service[] = [
       "Outdoor shoots",
       "Multi-camera productions",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-6.webp",
   },
   {
     number: "07",
@@ -124,7 +124,7 @@ export const services: Service[] = [
       "Signage",
       "Custom printed products",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-7.webp",
   },
   {
     number: "08",
@@ -139,6 +139,6 @@ export const services: Service[] = [
       "Temporary installations",
       "Custom brand environments",
     ],
-    image: "/images/emarq-hero.jpg",
+    image: "/images/service-8.webp",
   },
 ];
