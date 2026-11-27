@@ -91,7 +91,7 @@ export default function AboutFounder() {
                                     src="/images/about-1.webp"
                                     alt="Minna Wahab — Founder of Emarq"
                                     fill
-                                    className="object-cover grayscale"
+                                    className="object-cover"
                                     sizes="(max-width: 1024px) 100vw, 45vw"
                                 />
 

@@ -365,7 +365,7 @@ export default function Hero() {
               "
             >
               <FramedImage
-                src="/images/hero-1.webp"
+                src="/images/hero-3.png"
                 alt="Emarq creative production"
                 priority
                 sizes="

@@ -28,7 +28,7 @@ const industries: Industry[] = [
   {
     number: "02",
     title: "Corporate Organisations & Start-ups",
-    image: "/images/industry-2.webp",
+    image: "/images/IMG-6.webp",
     description:
       "Distinctive brand communication for established organisations and ambitious businesses.",
   },
@@ -42,7 +42,7 @@ const industries: Industry[] = [
   {
     number: "04",
     title: "Hospitality",
-    image: "/images/industry-4.webp",
+    image: "/images/IMG-13.webp",
     description:
       "Elevated creative experiences for hotels, restaurants and hospitality destinations.",
   },
@@ -63,14 +63,14 @@ const industries: Industry[] = [
   {
     number: "07",
     title: "Retail",
-    image: "/images/service-3.webp",
+    image: "/images/IMG-8.webp",
     description:
       "Branded environments and creative experiences that connect customers with products.",
   },
   {
     number: "08",
     title: "E-commerce",
-    image: "/images/industry-8.webp",
+    image: "/images/IMG-12.webp",
     description:
       "Digital-first brand experiences designed to capture attention and drive action.",
   },

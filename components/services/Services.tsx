@@ -605,6 +605,7 @@ export default function Services() {
    ORBIT IMAGE
 ============================================================ */
 
+
 function OrbitImage({
     service,
     index,
@@ -626,8 +627,6 @@ function OrbitImage({
 }) {
     let relativeIndex = index - active;
 
-    /* Circular positioning */
-
     if (relativeIndex > total / 2) {
         relativeIndex -= total;
     }
@@ -636,55 +635,18 @@ function OrbitImage({
         relativeIndex += total;
     }
 
-    /*
-     * Semi-circle positions.
-     *
-     * Center is deliberately larger and
-     * slightly lower than the surrounding images.
-     */
-
     const positions = [
-        {
-            x: -420,
-            y: 185,
-            rotate: -16,
-        },
-        {
-            x: -305,
-            y: 82,
-            rotate: -10,
-        },
-        {
-            x: -160,
-            y: 18,
-            rotate: -5,
-        },
-        {
-            x: 0,
-            y: 12,
-            rotate: 0,
-        },
-        {
-            x: 160,
-            y: 18,
-            rotate: 5,
-        },
-        {
-            x: 305,
-            y: 82,
-            rotate: 10,
-        },
-        {
-            x: 420,
-            y: 185,
-            rotate: 16,
-        },
+        { x: -420, y: 185, rotate: -16 },
+        { x: -305, y: 82, rotate: -10 },
+        { x: -160, y: 18, rotate: -5 },
+        { x: 0, y: 12, rotate: 0 },
+        { x: 160, y: 18, rotate: 5 },
+        { x: 305, y: 82, rotate: 10 },
+        { x: 420, y: 185, rotate: 16 },
     ];
 
     const positionIndex = relativeIndex + 3;
-
-    const position =
-        positions[positionIndex] ?? positions[3];
+    const position = positions[positionIndex] ?? positions[3];
 
     const isActive = relativeIndex === 0;
 
@@ -699,26 +661,16 @@ function OrbitImage({
                 }
             }}
             onMouseEnter={() => {
-                if (isActive) {
-                    onHoverPause();
-                }
+                if (isActive) onHoverPause();
             }}
             onMouseLeave={() => {
-                if (isActive) {
-                    onHoverResume();
-                }
+                if (isActive) onHoverResume();
             }}
             animate={{
                 x: position.x,
                 y: position.y,
                 rotate: position.rotate,
-
-                /*
-                 * Larger active image.
-                 */
-
-                scale: isActive ? 1.48 : 0.68,
-
+                scale: 1,
                 opacity:
                     Math.abs(relativeIndex) > 3
                         ? 0
@@ -730,92 +682,71 @@ function OrbitImage({
                 duration: 0.8,
                 ease: [0.16, 1, 0.3, 1],
             }}
-            className="
-        absolute
-        left-1/2
-        top-[54%]
-        z-20
-        h-[135px]
-        w-[96px]
-        -translate-x-1/2
-        -translate-y-1/2
-        overflow-hidden
-        rounded-[1.1rem]
-        border
-        border-white/15
-        bg-[#111]
-        shadow-[0_30px_80px_rgba(0,0,0,0.5)]
-        md:h-[155px]
-        md:w-[112px]
-        lg:h-[165px]
-        lg:w-[120px]
-      "
+            className={`
+                absolute
+                left-1/2
+                top-[59%]
+                z-20
+                -translate-x-1/2
+                -translate-y-1/2
+                overflow-hidden
+                rounded-[1.1rem]
+                border
+                border-white/15
+                bg-[#111]
+                shadow-[0_30px_80px_rgba(0,0,0,0.5)]
+                transition-[width,height]
+                duration-700
+                ${
+                    isActive
+                        ? "h-[230px] w-[190px] md:h-[280px] md:w-[240px] lg:h-[320px] lg:w-[280px]"
+                        : "h-[135px] w-[96px] md:h-[155px] md:w-[112px] lg:h-[165px] lg:w-[120px]"
+                }
+            `}
         >
-            {/* =================================================
-          IMAGE
-      ================================================= */}
-
             <Image
                 src={service.image}
                 alt={service.title}
                 fill
+                priority={isActive}
+                quality={100}
                 className={`
-          object-cover
-          transition-all
-          duration-700
-          ${isActive
-                        ? "grayscale-0"
-                        : "grayscale"
-                    }
-        `}
-                sizes="180px"
+                    object-cover
+                    transition-all duration-700
+                    ${isActive ? "grayscale-0" : "grayscale"}
+                `}
+                sizes={
+                    isActive
+                        ? "(max-width: 768px) 230px, (max-width: 1024px) 280px, 320px"
+                        : "165px"
+                }
             />
-
-            {/* =================================================
-          OVERLAY
-      ================================================= */}
 
             <div
                 className={`
-          absolute
-          inset-0
-          transition-all
-          duration-500
-          ${isActive
-                        ? "bg-emarq-purple/10"
-                        : "bg-black/55"
+                    absolute inset-0 transition-all duration-500
+                    ${
+                        isActive
+                            ? "bg-emarq-purple/10"
+                            : "bg-black/55"
                     }
-        `}
+                `}
             />
-
-            {/* =================================================
-          NUMBER
-      ================================================= */}
 
             <span
                 className="
-          absolute
-          left-3
-          top-3
-          text-[8px]
-          font-bold
-          tracking-[0.2em]
-          text-white/75
-        "
+                    absolute left-3 top-3
+                    text-[8px] font-bold
+                    tracking-[0.2em] text-white/75
+                "
             >
                 {service.number}
             </span>
 
-            {/* =================================================
-          ACTIVE PINK LIGHT
-      ================================================= */}
-
             {isActive && (
                 <>
                     <motion.div
-                        initial={{
-                            opacity: 0,
-                        }}
+                        initial={{ opacity: 0 }}
                         animate={{
                             opacity: [0.08, 0.24, 0.08],
                         }}
@@ -824,23 +755,15 @@ function OrbitImage({
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="
-              absolute
-              inset-0
-              bg-emarq-pink/20
-              "
+                        className="absolute inset-0 bg-emarq-pink/20"
                     />
-
-                    {/* Active border */}
 
                     <div
                         className="
-              absolute
-              inset-0
-              rounded-[1.1rem]
-              border
-              border-emarq-pink/35
-            "
+                            absolute inset-0
+                            rounded-[1.1rem]
+                            border border-emarq-pink/35
+                        "
                     />
                 </>
             )}

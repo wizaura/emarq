@@ -22,7 +22,7 @@ export const services: Service[] = [
       "Community management",
       "Monthly performance reporting",
     ],
-    image: "/images/service-1.webp",
+    image: "/images/IMG-2.webp",
   },
   {
     number: "02",
@@ -52,7 +52,7 @@ export const services: Service[] = [
       "Packaging design",
       "Visual communication",
     ],
-    image: "/images/service-3.webp",
+    image: "/images/IMG-7.webp",
   },
   {
     number: "04",
@@ -71,7 +71,7 @@ export const services: Service[] = [
       "Personalised gifting stations",
       "Shareable brand moments",
     ],
-    image: "/images/service-4.webp",
+    image: "/images/IMG-8.webp",
   },
   {
     number: "05",
@@ -87,7 +87,7 @@ export const services: Service[] = [
       "Custom packaging",
       "Premium corporate & event gifting",
     ],
-    image: "/images/service-5.webp",
+    image: "/images/IMG-11.webp",
   },
   {
     number: "06",
@@ -109,7 +109,7 @@ export const services: Service[] = [
       "Outdoor shoots",
       "Multi-camera productions",
     ],
-    image: "/images/service-6.webp",
+    image: "/images/IMG-1.webp",
   },
   {
     number: "07",
@@ -124,7 +124,7 @@ export const services: Service[] = [
       "Signage",
       "Custom printed products",
     ],
-    image: "/images/service-7.webp",
+    image: "/images/IMG-9.webp",
   },
   {
     number: "08",

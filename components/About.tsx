@@ -98,7 +98,7 @@ export default function About() {
                     {/* Image column */}
                     <div className="flex justify-start md:mt-2">
                         <FramedImage
-                            src="/images/emarq-hero.jpg"
+                            src="/images/IMG-3.webp"
                             alt="Emarq Marketing and Production"
                             sizes="(max-width: 768px) 100vw, 60vw"
                             className="w-full max-w-[620px]"
