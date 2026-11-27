@@ -69,7 +69,7 @@ export default function HeroVisual({
         "
       >
         <Image
-          src="/images/hero-2.webp"
+          src="/images/hero-4.png"
           alt="Emarq creative production"
           fill
           priority
