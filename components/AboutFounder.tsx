@@ -73,7 +73,7 @@ export default function AboutFounder() {
                         </h2>
 
                         <div className="lg:pb-2">
-                            <p className="max-w-xs text-sm leading-6 text-white/50">
+                            <p className="max-w-xs text-justify text-sm leading-6 text-white/50">
                                 A founder-led approach shaped by more than a
                                 decade of experience managing some of the
                                 world's most prestigious luxury maisons.
@@ -131,13 +131,13 @@ export default function AboutFounder() {
                             {/* Biography */}
                             <div className="max-w-2xl space-y-7 pb-12">
 
-                                <p className="text-xl leading-8 text-white md:text-2xl md:leading-9">
+                                <p className="text-xl text-justify leading-8 text-white md:text-2xl md:leading-9">
                                     Minna Wahab is the Founder of Emarq,
                                     bringing more than 13 years of experience
                                     in brand management.
                                 </p>
 
-                                <p className="text-sm leading-7 text-white/55 md:text-base md:leading-8">
+                                <p className="text-sm text-justify leading-7 text-white/55 md:text-base md:leading-8">
                                     During her career as a Brand Manager at
                                     Rivoli Group, she managed a portfolio of
                                     some of the world's most prestigious watch
@@ -147,7 +147,7 @@ export default function AboutFounder() {
                                     Glashütte Original.
                                 </p>
 
-                                <p className="text-sm leading-7 text-white/55 md:text-base md:leading-8">
+                                <p className="text-sm text-justify leading-7 text-white/55 md:text-base md:leading-8">
                                     Working with globally renowned maisons
                                     shaped her approach to branding, where
                                     precision, craftsmanship, attention to
@@ -155,7 +155,7 @@ export default function AboutFounder() {
                                     experiences are non-negotiable.
                                 </p>
 
-                                <p className="text-sm leading-7 text-white/55 md:text-base md:leading-8">
+                                <p className="text-sm text-justify leading-7 text-white/55 md:text-base md:leading-8">
                                     These principles became the foundation of
                                     Emarq. Today, Minna applies the same high
                                     standards to every campaign, activation,

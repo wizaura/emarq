@@ -159,6 +159,7 @@ export default function Process() {
           >
             <p
               className="
+                text-justify
                 max-w-[400px]
                 text-[15px]
                 leading-[1.7]

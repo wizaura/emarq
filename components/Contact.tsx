@@ -107,7 +107,7 @@ export default function Contact() {
             </h2>
 
             <div className="max-w-sm lg:pb-2">
-              <p className="text-sm leading-7 text-[#090909]/60 md:text-base">
+              <p className="text-sm text-justify leading-7 text-[#090909]/60 md:text-base">
                 Whether you are building a new brand, planning an activation,
                 strengthening your digital presence or looking for a creative
                 production partner, we would love to hear about your next

@@ -194,6 +194,7 @@ export default function WhyEmarq() {
           >
             <p
               className="
+                text-justify
                 text-[15px]
                 leading-[1.6]
                 text-[#090909]
@@ -208,6 +209,7 @@ export default function WhyEmarq() {
             <p
               className="
                 mt-4
+                text-justify
                 text-[12px]
                 leading-[1.7]
                 text-[#090909]/50
@@ -223,6 +225,7 @@ export default function WhyEmarq() {
             <p
               className="
                 mt-4
+                text-justify
                 text-[12px]
                 leading-[1.7]
                 text-[#090909]/50
