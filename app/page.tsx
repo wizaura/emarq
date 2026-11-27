@@ -10,6 +10,7 @@ import Process from "@/components/OurProcess";
 import AboutFounder from "@/components/AboutFounder";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Clients from "@/components/Clients";
 
 export const metadata: Metadata = {
   title: "Creative Marketing & Production Agency in Dubai, UAE",
@@ -53,6 +54,7 @@ export default function Home() {
       <Hero />
       <Services />
       <About />
+      <Clients />
       <WhyEmarq />
       <OurWork />
       <Industries />

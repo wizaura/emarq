@@ -44,7 +44,7 @@ export default function Services() {
             setActive(
                 (current) => (current + 1) % services.length,
             );
-        }, 4500);
+        }, 3500);
 
         return () => {
             window.clearInterval(timer);
